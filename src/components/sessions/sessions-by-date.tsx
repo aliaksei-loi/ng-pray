@@ -1,8 +1,15 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { SessionCard } from "./session-card";
-import { getRelativeDate, getDateKey, formatDuration } from "@/lib/format";
+import {
+  getRelativeDate,
+  getRelativeDateFull,
+  getDateKey,
+  formatDuration,
+  formatDurationClock,
+} from "@/lib/format";
+import { Loader2 } from "lucide-react";
 
 interface PrayerSession {
   id: string;
@@ -13,8 +20,11 @@ interface PrayerSession {
 }
 
 interface SessionsByDateProps {
-  limit?: number;
+  /** Items per page (default 20) */
+  pageSize?: number;
+  /** Bump to trigger a refetch from page 1 */
   refreshKey?: number;
+  variant?: "dashboard" | "history";
   onStatsChange?: (stats: {
     totalDuration: number;
     totalSessions: number;
@@ -23,49 +33,94 @@ interface SessionsByDateProps {
 }
 
 export function SessionsByDate({
-  limit,
+  pageSize = 20,
   refreshKey,
+  variant = "dashboard",
   onStatsChange,
 }: SessionsByDateProps) {
   const [sessions, setSessions] = useState<PrayerSession[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [nextCursor, setNextCursor] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
-  const fetchSessions = useCallback(async () => {
+  // Fetch first page + stats
+  const fetchInitial = useCallback(async () => {
     setLoading(true);
     try {
-      const url = limit
-        ? `/api/prayer-sessions?limit=${limit}`
-        : "/api/prayer-sessions?limit=200";
-      const res = await fetch(url);
+      const res = await fetch(`/api/prayer-sessions?limit=${pageSize}`);
       if (res.ok) {
         const data = await res.json();
         setSessions(data.sessions);
+        setNextCursor(data.nextCursor);
+        setHasMore(data.hasMore);
       }
     } catch {
       // ignore
     } finally {
       setLoading(false);
     }
-  }, [limit]);
+  }, [pageSize]);
+
+  // Fetch stats separately for dashboard
+  useEffect(() => {
+    if (!onStatsChange) return;
+    fetch("/api/prayer-sessions?stats=true")
+      .then((r) => r.json())
+      .then((data) => {
+        onStatsChange({
+          totalDuration: data.totalDuration,
+          totalSessions: data.totalSessions,
+          todayDuration: data.todayDuration,
+        });
+      })
+      .catch(() => {});
+  }, [onStatsChange, refreshKey]);
 
   useEffect(() => {
-    fetchSessions();
-  }, [fetchSessions, refreshKey]);
+    fetchInitial();
+  }, [fetchInitial, refreshKey]);
 
-  // Calculate and report stats
+  // Load next page
+  const loadMore = useCallback(async () => {
+    if (!nextCursor || loadingMore) return;
+    setLoadingMore(true);
+    try {
+      const res = await fetch(
+        `/api/prayer-sessions?limit=${pageSize}&cursor=${nextCursor}`
+      );
+      if (res.ok) {
+        const data = await res.json();
+        setSessions((prev) => [...prev, ...data.sessions]);
+        setNextCursor(data.nextCursor);
+        setHasMore(data.hasMore);
+      }
+    } catch {
+      // ignore
+    } finally {
+      setLoadingMore(false);
+    }
+  }, [nextCursor, loadingMore, pageSize]);
+
+  // Infinite scroll observer (history variant only)
   useEffect(() => {
-    if (!onStatsChange || loading) return;
+    if (variant !== "history" || !hasMore) return;
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
 
-    const totalDuration = sessions.reduce((sum, s) => sum + s.duration, 0);
-    const totalSessions = sessions.length;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !loadingMore) {
+          loadMore();
+        }
+      },
+      { rootMargin: "200px" }
+    );
 
-    const todayKey = getDateKey(new Date());
-    const todayDuration = sessions
-      .filter((s) => getDateKey(new Date(s.startTime)) === todayKey)
-      .reduce((sum, s) => sum + s.duration, 0);
-
-    onStatsChange({ totalDuration, totalSessions, todayDuration });
-  }, [sessions, loading, onStatsChange]);
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [variant, hasMore, loadingMore, loadMore]);
 
   function handleDelete(id: string) {
     setSessions((prev) => prev.filter((s) => s.id !== id));
@@ -73,11 +128,11 @@ export function SessionsByDate({
 
   if (loading) {
     return (
-      <div className="stagger-children space-y-3">
+      <div className="space-y-3">
         {[1, 2, 3].map((i) => (
           <div
             key={i}
-            className="shimmer glass h-20 rounded-2xl"
+            className={`liquid-glass rounded-2xl animate-pulse ${variant === "history" ? "h-24" : "h-20"}`}
           />
         ))}
       </div>
@@ -86,14 +141,11 @@ export function SessionsByDate({
 
   if (sessions.length === 0) {
     return (
-      <div className="glass rounded-2xl py-16 text-center animate-fade-in">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-orange-500/15 to-amber-500/10 text-3xl">
-          🕊️
-        </div>
-        <p className="font-medium text-white/70">
+      <div className="liquid-glass rounded-2xl py-16 text-center">
+        <p className="font-medium text-on-surface-variant/70">
           У вас пока нет сессий молитвы
         </p>
-        <p className="mt-1 text-sm text-white/30">
+        <p className="mt-1 text-sm text-on-surface-variant/30">
           Нажмите «Начать молитву» чтобы начать
         </p>
       </div>
@@ -112,41 +164,132 @@ export function SessionsByDate({
     (a, b) => new Date(b).getTime() - new Date(a).getTime()
   );
 
+  const todayKey = getDateKey(new Date());
+  const yesterdayDate = new Date();
+  yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+  const yesterdayKey = getDateKey(yesterdayDate);
+
+  const loadMoreButton = hasMore && (
+    <div ref={sentinelRef} className="flex justify-center py-6">
+      {loadingMore ? (
+        <Loader2 className="h-5 w-5 animate-spin text-primary/50" />
+      ) : (
+        <button
+          onClick={loadMore}
+          className="px-6 py-2.5 rounded-full liquid-glass text-xs font-label uppercase tracking-widest text-on-surface-variant/60 hover:text-primary hover:bg-white/5 transition-all"
+        >
+          Загрузить ещё
+        </button>
+      )}
+    </div>
+  );
+
+  if (variant === "history") {
+    return (
+      <div className="space-y-14">
+        {sortedDates.map((dateKey) => {
+          const daySessions = grouped[dateKey];
+          const totalDuration = daySessions.reduce(
+            (sum, s) => sum + s.duration,
+            0
+          );
+          const isToday = dateKey === todayKey;
+          const isYesterday = dateKey === yesterdayKey;
+          const isOlder = !isToday && !isYesterday;
+
+          const titleColor = isToday
+            ? "text-orange-400"
+            : isYesterday
+              ? "text-gray-400"
+              : "text-gray-500";
+
+          return (
+            <section key={dateKey}>
+              <div className="flex items-end justify-between mb-8 px-4 py-3 rounded-2xl liquid-glass-header">
+                <h3 className={`font-headline text-lg md:text-2xl font-bold ${titleColor}`}>
+                  {getRelativeDateFull(new Date(dateKey + "T12:00:00"))}
+                </h3>
+                <div className="bg-white/5 backdrop-blur-3xl ghost-border px-3 md:px-5 py-1.5 md:py-2 rounded-full flex items-center gap-2 md:gap-3">
+                  <span className="text-[9px] md:text-[10px] uppercase font-label tracking-widest text-gray-500">
+                    Итого:
+                  </span>
+                  <span className="font-label text-xs md:text-sm font-bold text-orange-300">
+                    {formatDurationClock(totalDuration)}
+                  </span>
+                </div>
+              </div>
+
+              <div
+                className={`space-y-3 md:space-y-5${
+                  isOlder
+                    ? " opacity-70 hover:opacity-100 transition-opacity duration-500"
+                    : ""
+                }`}
+              >
+                {daySessions.map((session) => (
+                  <SessionCard
+                    key={session.id}
+                    session={session}
+                    onDelete={handleDelete}
+                    variant="history"
+                    isToday={isToday}
+                  />
+                ))}
+              </div>
+            </section>
+          );
+        })}
+        {loadMoreButton}
+      </div>
+    );
+  }
+
+  // Dashboard variant
   return (
     <div className="space-y-6">
-      {sortedDates.map((dateKey, dateIdx) => {
+      {sortedDates.map((dateKey) => {
         const daySessions = grouped[dateKey];
         const totalDuration = daySessions.reduce(
           (sum, s) => sum + s.duration,
           0
         );
+        const isToday = dateKey === todayKey;
 
         return (
-          <div
-            key={dateKey}
-            className="animate-fade-in-up"
-            style={{ animationDelay: `${dateIdx * 100}ms` }}
-          >
-            <div className="mb-3 flex items-center justify-between">
-              <h3 className="font-label text-[11px] font-bold text-[#ddc1ae]/40 uppercase tracking-[0.25em]">
+          <div key={dateKey} className="space-y-4">
+            <div className="flex justify-between items-center px-2">
+              <span className="text-[11px] font-bold text-on-surface-variant/40 uppercase tracking-[0.25em]">
                 {getRelativeDate(new Date(dateKey + "T12:00:00"))}
-              </h3>
-              <span className="px-3 py-1 liquid-glass rounded-full text-[10px] font-label text-[#ffb77d]/80">
+              </span>
+              <span
+                className={`px-3 py-1 liquid-glass rounded-full text-[10px] font-label ${
+                  isToday ? "text-primary/80" : "text-on-surface-variant/30"
+                }`}
+              >
                 {formatDuration(totalDuration)}
               </span>
             </div>
-            <div className="liquid-glass rounded-[2rem] overflow-hidden divide-y divide-white/5">
+            <div
+              className={`liquid-glass rounded-[2rem] overflow-hidden divide-y divide-white/5${
+                !isToday
+                  ? " opacity-60 hover:opacity-100 transition-opacity"
+                  : ""
+              }`}
+            >
               {daySessions.map((session) => (
                 <SessionCard
                   key={session.id}
                   session={session}
                   onDelete={handleDelete}
+                  variant="dashboard"
+                  isToday={isToday}
                 />
               ))}
             </div>
           </div>
         );
       })}
+      {loadMoreButton}
     </div>
   );
 }

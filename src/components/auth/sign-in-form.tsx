@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { Mail, Lock } from "lucide-react";
 
 export function SignInForm() {
   const router = useRouter();
@@ -35,19 +36,19 @@ export function SignInForm() {
   }
 
   return (
-    <div className="apple-glass rounded-2xl p-8 md:p-12">
-      <div className="mb-8 text-center">
-        <h1 className="font-heading text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+    <div className="w-full max-w-md apple-glass rounded-2xl p-8 md:p-12 transition-all duration-500">
+      <div className="text-center mb-10">
+        <h1 className="font-headline text-4xl font-extrabold tracking-tight text-white mb-3">
           Вход
         </h1>
-        <p className="mt-3 text-[#ddc1ae]/60 text-sm leading-relaxed">
+        <p className="text-on-surface-variant/60 text-sm font-body leading-relaxed">
           Войдите в свой аккаунт
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {error && (
-          <div className="animate-scale-in rounded-xl bg-red-500/10 border border-red-500/20 p-3 text-sm text-red-400">
+          <div className="rounded-xl bg-red-500/10 border border-red-500/20 p-3 text-sm text-red-400">
             {error}
           </div>
         )}
@@ -58,14 +59,17 @@ export function SignInForm() {
           >
             Электронная почта
           </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="email@example.com"
-            required
-            className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-4 pr-4 text-white placeholder-white/20 focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/10 transition-all text-sm"
-          />
+          <div className="relative group">
+            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-orange-400 transition-colors" size={18} />
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="email@example.com"
+              required
+              className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder-white/20 focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/10 transition-all font-body text-sm"
+            />
+          </div>
         </div>
         <div className="space-y-2">
           <label
@@ -74,34 +78,39 @@ export function SignInForm() {
           >
             Пароль
           </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Ваш пароль"
-            required
-            className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-4 pr-4 text-white placeholder-white/20 focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/10 transition-all text-sm"
-          />
+          <div className="relative group">
+            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-orange-400 transition-colors" size={18} />
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="••••••••"
+              required
+              className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder-white/20 focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/10 transition-all font-body text-sm"
+            />
+          </div>
         </div>
-        <button
-          type="submit"
-          className="amber-glow w-full py-4 rounded-xl font-bold text-sm transition-all duration-300 active:scale-95"
-          disabled={loading}
-        >
-          {loading ? "Вход..." : "Войти"}
-        </button>
-        <div className="mt-10 pt-8 border-t border-white/5 text-center">
-          <p className="text-white/40 text-xs">
-            Нет аккаунта?{" "}
-            <Link
-              href="/sign-up"
-              className="text-orange-400 hover:text-orange-300 hover:underline underline-offset-4 font-semibold"
-            >
-              Зарегистрироваться
-            </Link>
-          </p>
+        <div className="pt-6">
+          <button
+            type="submit"
+            className="glow-button liquid-gloss w-full text-[#2f1500] font-bold py-4 rounded-xl transition-all duration-300 transform active:scale-95 shadow-xl shadow-orange-900/20 text-sm"
+            disabled={loading}
+          >
+            {loading ? "Вход..." : "Войти"}
+          </button>
         </div>
       </form>
+      <div className="mt-10 pt-8 border-t border-white/5 text-center">
+        <p className="text-white/40 font-body text-xs">
+          Нет аккаунта?{" "}
+          <Link
+            href="/sign-up"
+            className="text-orange-400 hover:text-orange-300 hover:underline underline-offset-4 transition-all ml-1 font-semibold"
+          >
+            Зарегистрироваться
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

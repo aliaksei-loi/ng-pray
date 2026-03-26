@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react";
 import YouTube from "react-youtube";
 import { extractYouTubeId } from "@/lib/youtube";
-import { Music, Play, Square, Link } from "lucide-react";
+import { Music, Play, Square, Link as LinkIcon } from "lucide-react";
 
 const STORAGE_KEY = "ng-pray-youtube-url";
 
-export function YouTubePlayer() {
+export function YouTubePlayer({ compact = false }: { compact?: boolean }) {
   const [url, setUrl] = useState("");
   const [videoId, setVideoId] = useState<string | null>(null);
   const [inputValue, setInputValue] = useState("");
@@ -39,29 +39,37 @@ export function YouTubePlayer() {
   }
 
   return (
-    <div className="liquid-glass rounded-[2.5rem] p-6 sm:p-8 transition-all duration-300">
-      <label className="mb-4 flex items-center gap-2 font-label text-[10px] uppercase tracking-[0.2em] text-[#ddc1ae]/50">
-        <Music className="h-3.5 w-3.5 text-[#ffb77d] animate-pulse" />
-        Музыка
-      </label>
+    <div className={`liquid-glass ${compact ? "rounded-xl p-3" : "rounded-[2.5rem] p-8"}`}>
+      <div className={`flex items-center justify-between ${compact ? "mb-2" : "mb-6"}`}>
+        <h4 className="text-[10px] font-label uppercase tracking-[0.2em] text-on-surface-variant/50">
+          Атмосфера
+        </h4>
+        <Music className="text-primary animate-pulse h-5 w-5" />
+      </div>
 
-      <form onSubmit={handleSubmit} className="space-y-3">
-        <div className="relative">
-          <Link className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#ddc1ae]/30 pointer-events-none" />
+      <form onSubmit={handleSubmit}>
+        <div className={`relative group ${compact ? "mb-2" : "mb-4"}`}>
+          <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+            <LinkIcon className="text-on-surface-variant/30 h-4 w-4" />
+          </div>
           <input
-            type="url"
-            placeholder="Вставьте ссылку YouTube..."
+            type="text"
+            placeholder="Ссылка YouTube..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            className="w-full bg-white/5 border border-white/5 rounded-2xl py-4 pl-12 pr-4 text-[11px] text-white/90 focus:ring-1 focus:ring-[#ffb77d]/40 focus:bg-white/[0.08] placeholder:text-[#ddc1ae]/20 outline-none transition-all"
+            className={`w-full bg-white/5 border border-white/5 rounded-xl pl-10 pr-3 text-[11px] font-body focus:ring-1 focus:ring-primary/40 focus:bg-white/[0.08] transition-all placeholder:text-on-surface-variant/20 outline-none ${
+              compact ? "py-2" : "py-4"
+            }`}
           />
         </div>
 
         <button
           type="submit"
-          className="w-full py-4 bg-white/5 rounded-2xl flex items-center justify-center gap-3 hover:bg-[#ffb77d]/20 hover:text-[#ffb77d] transition-all border border-white/5 text-white/60"
+          className={`w-full bg-white/5 rounded-xl flex items-center justify-center gap-2 hover:bg-primary/20 hover:text-primary transition-all border border-white/5 ${
+            compact ? "py-2" : "py-4"
+          }`}
         >
-          <Play className="h-4 w-4" />
+          <Play className="h-5 w-5" />
           <span className="text-[11px] font-bold uppercase tracking-widest">
             Воспроизвести
           </span>
@@ -69,7 +77,7 @@ export function YouTubePlayer() {
       </form>
 
       {videoId && (
-        <div className="mt-4 space-y-3 animate-scale-in">
+        <div className={`${compact ? "mt-3 space-y-3" : "mt-6 space-y-4"}`}>
           <div className="aspect-video w-full overflow-hidden rounded-2xl ring-1 ring-white/10">
             <YouTube
               videoId={videoId}
@@ -87,13 +95,12 @@ export function YouTubePlayer() {
             />
           </div>
 
-          {/* Now playing card */}
-          <div className="bg-white/[0.02] border border-white/5 p-4 rounded-[1.5rem] flex items-center justify-between">
+          <div className="p-4 rounded-[1.5rem] bg-white/[0.02] border border-white/5 flex items-center justify-between hover:bg-white/[0.05] transition-colors">
             <div className="flex items-center gap-3">
-              <Music className="h-4 w-4 text-[#ffb77d] animate-pulse" />
-              <span className="text-[11px] text-[#ddc1ae]/50 uppercase tracking-widest">
+              <Music className="h-4 w-4 text-primary animate-pulse" />
+              <p className="text-[9px] uppercase tracking-[0.2em] text-primary font-bold">
                 Сейчас играет
-              </span>
+              </p>
             </div>
             <button
               type="button"
@@ -101,7 +108,7 @@ export function YouTubePlayer() {
               className="flex items-center gap-2 text-[11px] text-white/30 uppercase tracking-widest hover:text-red-400 transition-colors"
             >
               <Square className="h-3 w-3" />
-              Остановить
+              Стоп
             </button>
           </div>
         </div>

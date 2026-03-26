@@ -5,78 +5,57 @@ import { formatTimerDisplay } from "@/lib/format";
 interface TimerDisplayProps {
   seconds: number;
   isRunning: boolean;
+  compact?: boolean;
 }
 
-export function TimerDisplay({ seconds, isRunning }: TimerDisplayProps) {
-  const circumference = 2 * Math.PI * 54;
+export function TimerDisplay({ seconds, isRunning, compact = false }: TimerDisplayProps) {
+  const circumference = 2 * Math.PI * 96; // ~603.19
   const minuteProgress = (seconds % 60) / 60;
   const dashoffset = circumference * (1 - minuteProgress);
 
   return (
-    <div className="flex flex-col items-center">
-      {/* Circular progress ring */}
-      <div className="relative flex items-center justify-center">
-        {/* Subtle blur glow behind SVG circle */}
-        <div className="absolute inset-0 bg-[#ffb77d]/5 rounded-full blur-3xl" />
+    <div
+      className={`relative flex items-center justify-center group ${
+        compact ? "w-16 h-16 shrink-0" : "w-52 h-52 mb-10"
+      }`}
+    >
+      <div className="absolute inset-0 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all duration-700" />
 
-        <svg
-          width="150"
-          height="150"
-          viewBox="0 0 120 120"
-          className="absolute -rotate-90"
-        >
-          <defs>
-            <linearGradient
-              id="timerGradient"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="#ffb77d" />
-              <stop offset="100%" stopColor="#ff8c00" />
-            </linearGradient>
-          </defs>
-          {/* Background ring (track) */}
+      <svg className="absolute w-full h-full -rotate-90" viewBox="0 0 208 208">
+        <circle
+          className="text-white/[0.03]"
+          cx="104"
+          cy="104"
+          fill="transparent"
+          r="96"
+          stroke="currentColor"
+          strokeWidth="6"
+        />
+        {isRunning && (
           <circle
-            cx="60"
-            cy="60"
-            r="54"
-            fill="none"
-            stroke="rgba(255,255,255,0.03)"
-            strokeWidth="6"
+            cx="104"
+            cy="104"
+            fill="transparent"
+            r="96"
+            stroke="url(#timerGradient)"
+            strokeDasharray="603"
+            strokeDashoffset={dashoffset}
+            strokeLinecap="round"
+            strokeWidth="8"
+            className="timer-ring"
           />
-          {/* Progress ring */}
-          {isRunning && (
-            <circle
-              cx="60"
-              cy="60"
-              r="54"
-              fill="none"
-              stroke="url(#timerGradient)"
-              strokeWidth="10"
-              strokeLinecap="round"
-              strokeDasharray={circumference}
-              strokeDashoffset={dashoffset}
-              className="timer-ring"
-            />
-          )}
-        </svg>
+        )}
+        <defs>
+          <linearGradient id="timerGradient" x1="0%" x2="100%" y1="0%" y2="100%">
+            <stop offset="0%" stopColor="#ffb77d" />
+            <stop offset="100%" stopColor="#ff8c00" />
+          </linearGradient>
+        </defs>
+      </svg>
 
-        <div className="font-label text-4xl font-bold tracking-tighter text-[#e5e2e1] tabular-nums transition-all duration-500">
+      {!compact && (
+        <div className="font-label text-4xl font-bold tracking-tighter text-on-surface drop-shadow-sm">
           {formatTimerDisplay(seconds)}
-        </div>
-      </div>
-
-      {isRunning && (
-        <div className="mt-3 flex items-center gap-2 animate-fade-in">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-orange-500" />
-          </span>
-          <span className="text-sm font-medium text-orange-400/80">
-            Молитва идёт...
-          </span>
         </div>
       )}
     </div>

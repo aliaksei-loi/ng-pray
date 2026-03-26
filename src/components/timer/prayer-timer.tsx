@@ -3,14 +3,24 @@
 import { useTimerContext } from "@/providers/timer-provider";
 import { TimerDisplay } from "./timer-display";
 import { toast } from "sonner";
-import { formatDuration } from "@/lib/format";
+import { formatDuration, formatTimerDisplay } from "@/lib/format";
 import { Play, Square } from "lucide-react";
+import { playStartSound, playStopSound } from "@/lib/sounds";
 
-export function PrayerTimer() {
+export function PrayerTimer({ compact = false }: { compact?: boolean }) {
   const { isRunning, elapsedSeconds, start, stop } = useTimerContext();
+
+  function handleStart() {
+    start();
+    playStartSound();
+    toast("🙏 Молитва начата", {
+      description: "Таймер запущен. Молитесь с миром в сердце.",
+    });
+  }
 
   async function handleStop() {
     const { startTime, endTime, duration } = stop();
+    playStopSound();
 
     if (duration < 1) return;
 
@@ -37,36 +47,71 @@ export function PrayerTimer() {
     }
   }
 
+  if (compact) {
+    // Single-row compact layout for mobile
+    return (
+      <div className="liquid-glass rounded-2xl px-4 py-3 relative">
+        <div className="absolute inset-0 silk-gradient pointer-events-none rounded-[inherit]" />
+        <div className="relative flex items-center gap-4">
+          {/* Timer value */}
+          <div className="flex-1 min-w-0">
+            <div className="text-[8px] font-label uppercase tracking-[0.2em] text-on-surface-variant/40 mb-0.5">
+              {isRunning ? "Идёт молитва" : "Время молитвы"}
+            </div>
+            <div className={`font-label text-2xl font-bold tabular-nums tracking-tight ${isRunning ? "text-primary" : "text-on-surface"}`}>
+              {formatTimerDisplay(elapsedSeconds)}
+            </div>
+          </div>
+
+          {/* Start/Stop button */}
+          <button
+            onClick={isRunning ? handleStop : handleStart}
+            className={`shrink-0 rounded-full font-bold text-[10px] px-5 py-2.5 flex items-center gap-2 active:scale-95 transition-all duration-300 ${
+              isRunning
+                ? "bg-white/10 text-red-400 hover:bg-red-500/15"
+                : "amber-glow text-on-primary shadow-[0_10px_20px_rgba(255,140,0,0.15)] hover:scale-[1.02]"
+            }`}
+          >
+            {isRunning ? (
+              <>
+                <Square className="h-3.5 w-3.5" />
+                <span className="uppercase tracking-widest">Стоп</span>
+              </>
+            ) : (
+              <>
+                <Play className="h-3.5 w-3.5" />
+                <span className="uppercase tracking-widest">Начать</span>
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Desktop full layout
   return (
-    <div
-      className={`relative rounded-[3rem] p-8 sm:p-10 transition-all duration-500 liquid-glass`}
-    >
-      {/* Silk gradient overlay */}
-      <div className="silk-gradient absolute inset-0 rounded-[3rem] pointer-events-none" />
+    <div className="liquid-glass rounded-[3rem] p-10 text-center relative flex flex-col items-center">
+      <div className="absolute inset-0 silk-gradient pointer-events-none rounded-[inherit]" />
 
-      {/* Ambient glow when running */}
-      {isRunning && (
-        <div className="pointer-events-none absolute -inset-2 -z-10 rounded-[3rem] bg-gradient-to-br from-orange-500/10 to-amber-500/5 blur-2xl animate-glow-pulse" />
-      )}
-
-      <h3 className="font-label text-[10px] uppercase tracking-[0.3em] text-[#ddc1ae]/50 text-center mb-6">
+      <h4 className="text-[10px] font-label uppercase tracking-[0.3em] text-on-surface-variant/50 mb-10">
         Время молитвы
-      </h3>
+      </h4>
 
       <TimerDisplay seconds={elapsedSeconds} isRunning={isRunning} />
 
       <button
-        onClick={isRunning ? handleStop : start}
-        className="amber-glow w-full py-4 rounded-full font-bold text-sm flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] active:scale-95 mt-8"
+        onClick={isRunning ? handleStop : handleStart}
+        className="w-full py-5 amber-glow rounded-full text-on-primary font-bold text-sm shadow-[0_20px_40px_rgba(255,140,0,0.2)] hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center gap-3 group"
       >
         {isRunning ? (
           <>
-            <Square className="h-4 w-4" />
+            <Square className="h-5 w-5" />
             <span className="uppercase tracking-widest">Остановить</span>
           </>
         ) : (
           <>
-            <Play className="h-4 w-4" />
+            <Play className="h-5 w-5" />
             <span className="uppercase tracking-widest">Начать молитву</span>
           </>
         )}

@@ -1,7 +1,9 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
-import { AppHeader } from "@/components/layout/app-header";
+import { SidebarNav } from "@/components/layout/sidebar-nav";
 import { PersistentPanel } from "@/components/layout/persistent-panel";
+import { SidebarProvider } from "@/providers/sidebar-provider";
+import { AppContent } from "@/components/layout/app-content";
 
 export default async function AppLayout({
   children,
@@ -15,18 +17,17 @@ export default async function AppLayout({
   }
 
   return (
-    <>
-      <div className="relative z-10 flex min-h-screen flex-col">
-        <AppHeader />
-        <div className="flex flex-1">
-          <main className="flex-1 overflow-y-auto p-4 md:p-6">
-            <div className="page-transition">{children}</div>
-          </main>
-          <PersistentPanel />
-        </div>
+    <SidebarProvider>
+      <div className="relative z-10 min-h-screen">
+        <SidebarNav />
+        <AppContent>
+          <div className="flex flex-col lg:flex-row gap-10">
+            <section className="flex-1 space-y-12">{children}</section>
+            <PersistentPanel />
+          </div>
+        </AppContent>
       </div>
-      {/* Portal target for dropdowns — must be outside the z-10 wrapper */}
       <div id="dropdown-portal" className="relative z-[9999]" />
-    </>
+    </SidebarProvider>
   );
 }

@@ -1,295 +1,102 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+  Stitch "Vesper Lumina" Design System
+  1:1 from Stitch tailwind config + custom CSS
+*/
+
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Fonts — exact Stitch config */
   --font-sans: var(--font-inter);
-  --font-heading: var(--font-manrope);
+  --font-headline: var(--font-manrope);
   --font-label: var(--font-space-grotesk);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --font-manrope: var(--font-manrope);
+  --font-body: var(--font-inter);
 
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-float-slow: float-slow 8s ease-in-out infinite;
-  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
-  --animate-shimmer: shimmer 2s linear infinite;
-  --animate-fade-in: fade-in 0.6s ease-out forwards;
-  --animate-fade-in-up: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-scale-in: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-slide-in-right: slide-in-right 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-counting: counting 0.3s ease-out;
+  /* Colors — exact Stitch config */
+  --color-on-surface: #e5e2e1;
+  --color-inverse-primary: #904d00;
+  --color-on-tertiary-container: #004360;
+  --color-surface: #131313;
+  --color-error: #ffb4ab;
+  --color-on-tertiary: #00344c;
+  --color-surface-container-highest: #353535;
+  --color-surface-container: #20201f;
+  --color-inverse-on-surface: #313030;
+  --color-on-background: #e5e2e1;
+  --color-on-error: #690005;
+  --color-on-tertiary-fixed: #001e2e;
+  --color-primary: #ffb77d;
+  --color-secondary-fixed: #ffddb7;
+  --color-outline: #a48c7a;
+  --color-primary-fixed: #ffdcc3;
+  --color-surface-container-low: #1c1b1b;
+  --color-on-secondary: #462a00;
+  --color-on-error-container: #ffdad6;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-tertiary-container: #00b5fc;
+  --color-inverse-surface: #e5e2e1;
+  --color-primary-fixed-dim: #ffb77d;
+  --color-surface-container-high: #2a2a2a;
+  --color-on-secondary-fixed-variant: #653e00;
+  --color-background: #131313;
+  --color-surface-tint: #ffb77d;
+  --color-on-primary: #4d2600;
+  --color-primary-container: #ff8c00;
+  --color-on-tertiary-fixed-variant: #004c6c;
+  --color-on-primary-container: #623200;
+  --color-on-secondary-container: #684100;
+  --color-surface-bright: #393939;
+  --color-outline-variant: #564334;
+  --color-surface-dim: #131313;
+  --color-tertiary-fixed-dim: #85cfff;
+  --color-surface-variant: #353535;
+  --color-on-surface-variant: #ddc1ae;
+  --color-secondary: #ffcb8d;
+  --color-on-primary-fixed-variant: #6e3900;
+  --color-tertiary-fixed: #c7e7ff;
+  --color-secondary-fixed-dim: #ffb95c;
+  --color-secondary-container: #ffa504;
+  --color-tertiary: #85cfff;
+  --color-on-primary-fixed: #2f1500;
+  --color-error-container: #93000a;
+  --color-on-secondary-fixed: #2a1700;
+  --color-foreground: #e5e2e1;
+
+  /* Border radius — exact Stitch config */
+  --radius-DEFAULT: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
 }
 
 /* ═══════════════════════════════════════════
-   VESPER LUMINA — Stitch Design System
-   Amber Vitrum / Liquid Glass Theme
-   ═══════════════════════════════════════════ */
-
-:root {
-  /* Surface hierarchy — Stitch "Vesper Lumina" tokens */
-  --background: #131313;
-  --foreground: #e5e2e1;
-
-  /* Cards: liquid glass */
-  --card: rgba(42, 42, 42, 0.4);
-  --card-foreground: #e5e2e1;
-
-  --popover: rgba(30, 30, 30, 0.95);
-  --popover-foreground: #e5e2e1;
-
-  /* Primary: amber silk gradient */
-  --primary: #ffb77d;
-  --primary-foreground: #2f1500;
-
-  --secondary: #1c1b1b;
-  --secondary-foreground: #e5e2e1;
-
-  --muted: #1c1b1b;
-  --muted-foreground: #a48c7a;
-
-  --accent: #2a2a2a;
-  --accent-foreground: #e5e2e1;
-
-  --destructive: #ffb4ab;
-
-  /* Borders: ghost borders */
-  --border: rgba(255, 255, 255, 0.05);
-  --input: rgba(255, 255, 255, 0.08);
-  --ring: rgba(255, 183, 125, 0.4);
-
-  --chart-1: #ffb77d;
-  --chart-2: #ffcb8d;
-  --chart-3: #ff8c00;
-  --chart-4: #85cfff;
-  --chart-5: #ffb4ab;
-
-  --radius: 0.75rem;
-
-  --sidebar: rgba(14, 14, 14, 0.8);
-  --sidebar-foreground: #e5e2e1;
-  --sidebar-primary: #ffb77d;
-  --sidebar-primary-foreground: #2f1500;
-  --sidebar-accent: rgba(53, 53, 52, 0.4);
-  --sidebar-accent-foreground: #e5e2e1;
-  --sidebar-border: rgba(255, 255, 255, 0.05);
-  --sidebar-ring: rgba(255, 183, 125, 0.3);
-
-  /* Stitch surface tiers */
-  --surface: #131313;
-  --surface-dim: #131313;
-  --surface-container-lowest: #0e0e0e;
-  --surface-container-low: #1c1b1b;
-  --surface-container: #20201f;
-  --surface-container-high: #2a2a2a;
-  --surface-container-highest: #353535;
-  --surface-bright: #393939;
-  --surface-variant: #353535;
-  --surface-tint: #ffb77d;
-
-  /* Stitch accent tokens */
-  --on-surface: #e5e2e1;
-  --on-surface-variant: #ddc1ae;
-  --primary-container: #ff8c00;
-  --on-primary: #4d2600;
-  --outline: #a48c7a;
-  --outline-variant: #564334;
-  --tertiary: #85cfff;
-  --error-color: #ffb4ab;
-}
-
-.dark {
-  --background: #131313;
-  --foreground: #e5e2e1;
-}
-
-/* ═══════════════════════════════════════════
-   PORTAL Z-INDEX FIX
-   ═══════════════════════════════════════════ */
-
-body > div:has([data-slot="dropdown-menu-content"]),
-body > div:has([data-slot="sheet-overlay"]) {
-  position: relative;
-  z-index: 99999;
-}
-
-/* ═══════════════════════════════════════════
-   KEYFRAME ANIMATIONS
-   ═══════════════════════════════════════════ */
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(1deg); }
-}
-
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-6px) scale(1.02); }
-}
-
-@keyframes glow-pulse {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.08); }
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes scale-in {
-  from { opacity: 0; transform: scale(0.92); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes slide-in-right {
-  from { opacity: 0; transform: translateX(24px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes counting {
-  from { transform: scale(1.1); }
-  to { transform: scale(1); }
-}
-
-/* Liquid orb animations */
-@keyframes orb-drift-1 {
-  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  20% { transform: translate(100px, -80px) scale(1.15) rotate(5deg); }
-  40% { transform: translate(-50px, -160px) scale(0.9) rotate(-3deg); }
-  60% { transform: translate(-120px, -40px) scale(1.1) rotate(8deg); }
-  80% { transform: translate(60px, 60px) scale(0.95) rotate(-5deg); }
-}
-
-@keyframes orb-drift-2 {
-  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  25% { transform: translate(-80px, 100px) scale(0.9) rotate(-6deg); }
-  50% { transform: translate(120px, 50px) scale(1.2) rotate(4deg); }
-  75% { transform: translate(50px, -90px) scale(1) rotate(-3deg); }
-}
-
-@keyframes orb-drift-3 {
-  0%, 100% { transform: translate(0, 0) scale(1.05) rotate(0deg); }
-  33% { transform: translate(-120px, -60px) scale(0.85) rotate(7deg); }
-  66% { transform: translate(80px, 100px) scale(1.15) rotate(-4deg); }
-}
-
-@keyframes orb-drift-4 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  30% { transform: translate(60px, 120px) scale(1.1); }
-  60% { transform: translate(-90px, -30px) scale(0.9); }
-}
-
-@keyframes ring-rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-  }
-}
-
-/* ═══════════════════════════════════════════
-   LIQUID GLASS UTILITIES (Stitch spec)
-   "No-Line Rule" — use surface shifts, not borders
+   Stitch CSS utility classes — verbatim
    ═══════════════════════════════════════════ */
 
 .liquid-glass {
   background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
     0 4px 24px -1px rgba(0, 0, 0, 0.2),
     0 12px 40px -2px rgba(0, 0, 0, 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.liquid-glass:hover {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-/* Legacy aliases */
-.glass { @extend .liquid-glass; }
-
-.glass-strong {
-  background: rgba(255, 255, 255, 0.06);
+.liquid-glass-dark {
+  background: rgba(20, 20, 20, 0.6);
   backdrop-filter: blur(50px) saturate(200%);
   -webkit-backdrop-filter: blur(50px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
-.glass-glow {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid rgba(255, 183, 125, 0.15);
-  box-shadow:
-    0 8px 32px rgba(255, 140, 0, 0.12),
-    0 0 1px rgba(255, 255, 255, 0.1) inset;
-}
-
-/* Apple-style glass for auth cards */
 .apple-glass {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
   backdrop-filter: blur(40px) saturate(180%);
@@ -298,41 +105,67 @@ body > div:has([data-slot="sheet-overlay"]) {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
-/* ═══════════════════════════════════════════
-   AMBER GLOW — Primary CTA style
-   Silk gradient from primary → primary-container
-   ═══════════════════════════════════════════ */
-
 .amber-glow {
   background: linear-gradient(135deg, #ffb77d 0%, #ff8c00 100%);
   box-shadow: 0 8px 32px rgba(255, 140, 0, 0.25);
-  color: #2f1500;
 }
 
-.amber-glow:hover {
-  box-shadow: 0 12px 40px rgba(255, 140, 0, 0.35);
-  transform: scale(1.02);
-}
-
-.amber-glow:active {
-  transform: scale(0.98);
-}
-
-/* Silk gradient overlay for glass panels */
 .silk-gradient {
   background: linear-gradient(135deg, rgba(255, 183, 125, 0.1) 0%, rgba(255, 140, 0, 0.05) 100%);
 }
 
-/* Ghost border — for when containment is needed */
+.silk-gradient-primary {
+  background: linear-gradient(135deg, #ffb77d 0%, #ff8c00 100%);
+  box-shadow: 0 20px 40px -10px rgba(255, 140, 0, 0.3);
+}
+
+.silk-gradient-amber {
+  background: radial-gradient(circle at top left, rgba(255, 183, 125, 0.15), transparent 70%);
+}
+
+.liquid-glass-header {
+  background: rgba(255, 140, 0, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 183, 125, 0.1);
+}
+
 .ghost-border {
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Gloss reflection on hover */
+.sunlight-shadow {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 140, 0, 0.05);
+}
+
+.premium-shadow {
+  box-shadow:
+    0 10px 30px -10px rgba(0, 0, 0, 0.5),
+    0 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+.liquid-gloss {
+  background: linear-gradient(180deg, rgba(255, 183, 125, 1) 0%, rgba(255, 140, 0, 1) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-gloss::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+
 .gloss-reflection {
   position: relative;
   overflow: hidden;
 }
+
 .gloss-reflection::after {
   content: '';
   position: absolute;
@@ -344,128 +177,60 @@ body > div:has([data-slot="sheet-overlay"]) {
   pointer-events: none;
   transition: transform 0.6s ease;
 }
+
 .gloss-reflection:hover::after {
   transform: translate(20%, 20%);
 }
 
+.glow-button:hover {
+  box-shadow: 0 0 30px rgba(255, 140, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Background orbs — from Stitch landing */
+.bg-orb {
+  position: fixed;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  filter: blur(140px);
+  z-index: -1;
+  opacity: 0.2;
+}
+
 /* ═══════════════════════════════════════════
-   ANIMATED BACKGROUND ORBS
+   Base styles
    ═══════════════════════════════════════════ */
 
-.orb {
-  position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  will-change: transform;
-}
-
-.orb-1 {
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(255, 140, 0, 0.12) 0%, transparent 70%);
-  top: -15%;
-  right: -10%;
-  animation: orb-drift-1 24s ease-in-out infinite;
-  filter: blur(80px);
-}
-
-.orb-2 {
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(255, 140, 0, 0.08) 0%, transparent 70%);
-  bottom: -10%;
-  left: -8%;
-  animation: orb-drift-2 28s ease-in-out infinite;
-  filter: blur(100px);
-}
-
-.orb-3 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(133, 207, 255, 0.06) 0%, transparent 70%);
-  top: 35%;
-  left: 25%;
-  animation: orb-drift-3 22s ease-in-out infinite;
-  filter: blur(90px);
-}
-
-.orb-4 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(255, 183, 125, 0.08) 0%, transparent 70%);
-  top: 15%;
-  left: 10%;
-  animation: orb-drift-4 20s ease-in-out infinite;
-  filter: blur(60px);
+@layer base {
+  * {
+    @apply border-outline-variant/15;
+  }
+  body {
+    @apply bg-surface text-on-surface font-body;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headline);
+  }
 }
 
 /* ═══════════════════════════════════════════
-   TIMER RING
+   Portal z-index fix for Base UI dropdowns
+   ═══════════════════════════════════════════ */
+
+body > div:has([data-slot="dropdown-menu-content"]),
+body > div:has([data-slot="sheet-overlay"]) {
+  position: relative;
+  z-index: 99999;
+}
+
+/* ═══════════════════════════════════════════
+   Timer ring animation
    ═══════════════════════════════════════════ */
 
 .timer-ring {
   transition: stroke-dashoffset 1s linear;
-}
-
-/* ═══════════════════════════════════════════
-   STAGGER + PAGE TRANSITIONS
-   ═══════════════════════════════════════════ */
-
-.stagger-children > * {
-  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
-.stagger-children > *:nth-child(2) { animation-delay: 80ms; }
-.stagger-children > *:nth-child(3) { animation-delay: 160ms; }
-.stagger-children > *:nth-child(4) { animation-delay: 240ms; }
-.stagger-children > *:nth-child(5) { animation-delay: 320ms; }
-.stagger-children > *:nth-child(6) { animation-delay: 400ms; }
-.stagger-children > *:nth-child(7) { animation-delay: 480ms; }
-.stagger-children > *:nth-child(8) { animation-delay: 560ms; }
-
-.page-transition {
-  animation: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* ═══════════════════════════════════════════
-   SHIMMER EFFECT
-   ═══════════════════════════════════════════ */
-
-.shimmer {
-  position: relative;
-  overflow: hidden;
-}
-
-.shimmer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.05) 40%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0.05) 60%,
-    transparent 100%
-  );
-  animation: shimmer 2.5s linear infinite;
-}
-
-/* ═══════════════════════════════════════════
-   GRADIENT TEXT HELPERS
-   ═══════════════════════════════════════════ */
-
-.text-gradient-orange {
-  background: linear-gradient(135deg, #ffb77d 0%, #ff8c00 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-gradient-silver {
-  background: linear-gradient(135deg, #e5e2e1 0%, #a48c7a 50%, #e5e2e1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
