@@ -87,7 +87,7 @@ export default function DashboardPage() {
       {/* ===== Stat Cards — Desktop: 3 columns spacious ===== */}
       <div className="hidden md:grid grid-cols-3 gap-6">
         {/* Total Time */}
-        <div className="liquid-glass rounded-2xl p-6 group hover:bg-white/5 transition-all duration-500">
+        <div className="liquid-glass rounded-2xl p-6 group hover:bg-on-surface/5 transition-all duration-500">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
               <Clock className="h-5 w-5" />
@@ -106,7 +106,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Sessions */}
-        <div className="liquid-glass rounded-2xl p-6 group hover:bg-white/5 transition-all duration-500">
+        <div className="liquid-glass rounded-2xl p-6 group hover:bg-on-surface/5 transition-all duration-500">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-10 h-10 rounded-xl bg-tertiary/10 flex items-center justify-center text-tertiary">
               <Calendar className="h-5 w-5" />
@@ -122,7 +122,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Today */}
-        <div className="liquid-glass rounded-2xl p-6 group hover:bg-white/5 transition-all duration-500">
+        <div className="liquid-glass rounded-2xl p-6 group hover:bg-on-surface/5 transition-all duration-500">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400">
               <Zap className="h-5 w-5" />
@@ -134,7 +134,7 @@ export default function DashboardPage() {
           <div className="font-label text-3xl font-bold text-on-surface">
             {stats.todayDuration > 0 ? formatDuration(stats.todayDuration) : "---"}
           </div>
-          <div className="w-full bg-white/5 h-1.5 mt-4 rounded-full overflow-hidden">
+          <div className="w-full bg-on-surface/5 h-1.5 mt-4 rounded-full overflow-hidden">
             <div
               className="bg-gradient-to-r from-green-500/60 to-green-400/80 h-full rounded-full shadow-[0_0_8px_rgba(74,222,128,0.3)]"
               style={{ width: `${Math.min(100, Math.round((stats.todayDuration / 900) * 100))}%` }}
@@ -153,7 +153,7 @@ export default function DashboardPage() {
       <div className="space-y-6">
         <h3 className="font-headline text-xl md:text-2xl font-bold flex items-center gap-3">
           <span>Последние сессии</span>
-          <span className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
+          <span className="h-px flex-1 bg-gradient-to-r from-on-surface/10 to-transparent" />
           <Link
             href="/history"
             className="text-[11px] font-label uppercase tracking-widest text-primary/70 hover:text-primary transition-colors shrink-0"

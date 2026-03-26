@@ -57,7 +57,7 @@ export function YouTubePlayer({ compact = false }: { compact?: boolean }) {
             placeholder="Ссылка YouTube..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            className={`w-full bg-white/5 border border-white/5 rounded-xl pl-10 pr-3 text-[11px] font-body focus:ring-1 focus:ring-primary/40 focus:bg-white/[0.08] transition-all placeholder:text-on-surface-variant/20 outline-none ${
+            className={`w-full bg-on-surface/5 border border-on-surface/5 rounded-xl pl-10 pr-3 text-[11px] font-body focus:ring-1 focus:ring-primary/40 focus:bg-on-surface/[0.08] transition-all placeholder:text-on-surface-variant/20 outline-none ${
               compact ? "py-2" : "py-4"
             }`}
           />
@@ -65,7 +65,7 @@ export function YouTubePlayer({ compact = false }: { compact?: boolean }) {
 
         <button
           type="submit"
-          className={`w-full bg-white/5 rounded-xl flex items-center justify-center gap-2 hover:bg-primary/20 hover:text-primary transition-all border border-white/5 ${
+          className={`w-full bg-on-surface/5 rounded-xl flex items-center justify-center gap-2 hover:bg-primary/20 hover:text-primary transition-all border border-on-surface/5 ${
             compact ? "py-2" : "py-4"
           }`}
         >
@@ -78,7 +78,7 @@ export function YouTubePlayer({ compact = false }: { compact?: boolean }) {
 
       {videoId && (
         <div className={`${compact ? "mt-3 space-y-3" : "mt-6 space-y-4"}`}>
-          <div className="aspect-video w-full overflow-hidden rounded-2xl ring-1 ring-white/10">
+          <div className="aspect-video w-full overflow-hidden rounded-2xl ring-1 ring-on-surface/10">
             <YouTube
               videoId={videoId}
               opts={{
@@ -95,7 +95,7 @@ export function YouTubePlayer({ compact = false }: { compact?: boolean }) {
             />
           </div>
 
-          <div className="p-4 rounded-[1.5rem] bg-white/[0.02] border border-white/5 flex items-center justify-between hover:bg-white/[0.05] transition-colors">
+          <div className="p-4 rounded-[1.5rem] bg-on-surface/[0.02] border border-on-surface/5 flex items-center justify-between hover:bg-on-surface/[0.05] transition-colors">
             <div className="flex items-center gap-3">
               <Music className="h-4 w-4 text-primary animate-pulse" />
               <p className="text-[9px] uppercase tracking-[0.2em] text-primary font-bold">
@@ -105,7 +105,7 @@ export function YouTubePlayer({ compact = false }: { compact?: boolean }) {
             <button
               type="button"
               onClick={handleClear}
-              className="flex items-center gap-2 text-[11px] text-white/30 uppercase tracking-widest hover:text-red-400 transition-colors"
+              className="flex items-center gap-2 text-[11px] text-on-surface/30 uppercase tracking-widest hover:text-red-400 transition-colors"
             >
               <Square className="h-3 w-3" />
               Стоп

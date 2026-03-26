@@ -8,6 +8,72 @@
   1:1 from Stitch tailwind config + custom CSS
 */
 
+/* Light theme (default when no .dark class) */
+:root {
+  --md-background: #fff8f5;
+  --md-foreground: #1d1b1a;
+  --md-surface: #fff8f5;
+  --md-surface-dim: #e2d6cf;
+  --md-surface-bright: #fff8f5;
+  --md-surface-container-lowest: #ffffff;
+  --md-surface-container-low: #fef1ea;
+  --md-surface-container: #f7ebe3;
+  --md-surface-container-high: #f1e5dd;
+  --md-surface-container-highest: #ede0d8;
+  --md-surface-variant: #f5dfd1;
+  --md-on-surface: #1d1b1a;
+  --md-on-surface-variant: #504339;
+  --md-primary: #8b4f00;
+  --md-primary-container: #ffdcc3;
+  --md-on-primary: #ffffff;
+  --md-on-primary-container: #2f1500;
+  --md-secondary: #7b5800;
+  --md-secondary-container: #ffddb7;
+  --md-tertiary: #006590;
+  --md-tertiary-container: #c7e7ff;
+  --md-outline: #857368;
+  --md-outline-variant: #d7c3b5;
+  --md-error: #ba1a1a;
+  --md-error-container: #ffdad6;
+  --md-on-error: #ffffff;
+  --md-inverse-surface: #333130;
+  --md-inverse-on-surface: #faeee8;
+  --md-inverse-primary: #ffb77d;
+}
+
+/* Dark theme */
+.dark {
+  --md-background: #131313;
+  --md-foreground: #e5e2e1;
+  --md-surface: #131313;
+  --md-surface-dim: #131313;
+  --md-surface-bright: #393939;
+  --md-surface-container-lowest: #0e0e0e;
+  --md-surface-container-low: #1c1b1b;
+  --md-surface-container: #20201f;
+  --md-surface-container-high: #2a2a2a;
+  --md-surface-container-highest: #353535;
+  --md-surface-variant: #353535;
+  --md-on-surface: #e5e2e1;
+  --md-on-surface-variant: #ddc1ae;
+  --md-primary: #ffb77d;
+  --md-primary-container: #ff8c00;
+  --md-on-primary: #4d2600;
+  --md-on-primary-container: #623200;
+  --md-secondary: #ffcb8d;
+  --md-secondary-container: #ffa504;
+  --md-tertiary: #85cfff;
+  --md-tertiary-container: #00b5fc;
+  --md-outline: #a48c7a;
+  --md-outline-variant: #564334;
+  --md-error: #ffb4ab;
+  --md-error-container: #93000a;
+  --md-on-error: #690005;
+  --md-inverse-surface: #e5e2e1;
+  --md-inverse-on-surface: #313030;
+  --md-inverse-primary: #904d00;
+}
+
 @theme inline {
   /* Fonts — exact Stitch config */
   --font-sans: var(--font-inter);
@@ -16,55 +82,55 @@
   --font-manrope: var(--font-manrope);
   --font-body: var(--font-inter);
 
-  /* Colors — exact Stitch config */
-  --color-on-surface: #e5e2e1;
-  --color-inverse-primary: #904d00;
-  --color-on-tertiary-container: #004360;
-  --color-surface: #131313;
-  --color-error: #ffb4ab;
+  /* Colors — mapped to CSS custom properties for light/dark theming */
+  --color-background: var(--md-background);
+  --color-foreground: var(--md-foreground);
+  --color-surface: var(--md-surface);
+  --color-surface-dim: var(--md-surface-dim);
+  --color-surface-bright: var(--md-surface-bright);
+  --color-surface-container-lowest: var(--md-surface-container-lowest);
+  --color-surface-container-low: var(--md-surface-container-low);
+  --color-surface-container: var(--md-surface-container);
+  --color-surface-container-high: var(--md-surface-container-high);
+  --color-surface-container-highest: var(--md-surface-container-highest);
+  --color-surface-variant: var(--md-surface-variant);
+  --color-on-surface: var(--md-on-surface);
+  --color-on-surface-variant: var(--md-on-surface-variant);
+  --color-on-background: var(--md-on-surface);
+  --color-primary: var(--md-primary);
+  --color-primary-container: var(--md-primary-container);
+  --color-on-primary: var(--md-on-primary);
+  --color-on-primary-container: var(--md-on-primary-container);
+  --color-secondary: var(--md-secondary);
+  --color-secondary-container: var(--md-secondary-container);
+  --color-tertiary: var(--md-tertiary);
+  --color-tertiary-container: var(--md-tertiary-container);
+  --color-error: var(--md-error);
+  --color-error-container: var(--md-error-container);
+  --color-on-error: var(--md-on-error);
+  --color-outline: var(--md-outline);
+  --color-outline-variant: var(--md-outline-variant);
+  --color-inverse-surface: var(--md-inverse-surface);
+  --color-inverse-on-surface: var(--md-inverse-on-surface);
+  --color-inverse-primary: var(--md-inverse-primary);
+  --color-surface-tint: var(--md-primary);
   --color-on-tertiary: #00344c;
-  --color-surface-container-highest: #353535;
-  --color-surface-container: #20201f;
-  --color-inverse-on-surface: #313030;
-  --color-on-background: #e5e2e1;
-  --color-on-error: #690005;
-  --color-on-tertiary-fixed: #001e2e;
-  --color-primary: #ffb77d;
-  --color-secondary-fixed: #ffddb7;
-  --color-outline: #a48c7a;
-  --color-primary-fixed: #ffdcc3;
-  --color-surface-container-low: #1c1b1b;
+  --color-on-tertiary-container: #004360;
   --color-on-secondary: #462a00;
-  --color-on-error-container: #ffdad6;
-  --color-surface-container-lowest: #0e0e0e;
-  --color-tertiary-container: #00b5fc;
-  --color-inverse-surface: #e5e2e1;
-  --color-primary-fixed-dim: #ffb77d;
-  --color-surface-container-high: #2a2a2a;
-  --color-on-secondary-fixed-variant: #653e00;
-  --color-background: #131313;
-  --color-surface-tint: #ffb77d;
-  --color-on-primary: #4d2600;
-  --color-primary-container: #ff8c00;
-  --color-on-tertiary-fixed-variant: #004c6c;
-  --color-on-primary-container: #623200;
   --color-on-secondary-container: #684100;
-  --color-surface-bright: #393939;
-  --color-outline-variant: #564334;
-  --color-surface-dim: #131313;
-  --color-tertiary-fixed-dim: #85cfff;
-  --color-surface-variant: #353535;
-  --color-on-surface-variant: #ddc1ae;
-  --color-secondary: #ffcb8d;
-  --color-on-primary-fixed-variant: #6e3900;
-  --color-tertiary-fixed: #c7e7ff;
-  --color-secondary-fixed-dim: #ffb95c;
-  --color-secondary-container: #ffa504;
-  --color-tertiary: #85cfff;
-  --color-on-primary-fixed: #2f1500;
-  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+  --color-on-tertiary-fixed: #001e2e;
+  --color-on-tertiary-fixed-variant: #004c6c;
   --color-on-secondary-fixed: #2a1700;
-  --color-foreground: #e5e2e1;
+  --color-on-secondary-fixed-variant: #653e00;
+  --color-on-primary-fixed: #2f1500;
+  --color-on-primary-fixed-variant: #6e3900;
+  --color-primary-fixed: #ffdcc3;
+  --color-primary-fixed-dim: #ffb77d;
+  --color-secondary-fixed: #ffddb7;
+  --color-secondary-fixed-dim: #ffb95c;
+  --color-tertiary-fixed: #c7e7ff;
+  --color-tertiary-fixed-dim: #85cfff;
 
   /* Border radius — exact Stitch config */
   --radius-DEFAULT: 0.25rem;
@@ -136,6 +202,52 @@
 
 .sunlight-shadow {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 140, 0, 0.05);
+}
+
+/* ═══════════════════════════════════════════
+   Light mode glass overrides
+   ═══════════════════════════════════════════ */
+
+:root:not(.dark) .liquid-glass {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.06), 0 12px 40px -2px rgba(0, 0, 0, 0.04), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(40px);
+}
+
+:root:not(.dark) .liquid-glass-dark {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(40px);
+}
+
+:root:not(.dark) .apple-glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.4) 100%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(40px);
+}
+
+:root:not(.dark) .ghost-border {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+:root:not(.dark) .sunlight-shadow {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), 0 0 20px rgba(255, 140, 0, 0.05);
+}
+
+:root:not(.dark) .silk-gradient {
+  background: linear-gradient(135deg, rgba(255, 183, 125, 0.06) 0%, rgba(255, 140, 0, 0.03) 100%);
+}
+
+:root:not(.dark) .liquid-glass-header {
+  background: rgba(255, 140, 0, 0.04);
+  border-bottom: 1px solid rgba(255, 183, 125, 0.15);
+}
+
+:root:not(.dark) .amber-glow {
+  background: linear-gradient(135deg, #ff9500, #ff8c00, #ffb347);
 }
 
 .premium-shadow {

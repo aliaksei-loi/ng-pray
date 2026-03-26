@@ -22,7 +22,7 @@ export default function AuthLayout({
 
       {/* TopNavBar Component */}
       <header className="fixed top-0 w-full z-50">
-        <nav className="flex justify-between items-center px-8 py-4 w-full bg-[#131313]/50 backdrop-blur-3xl shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+        <nav className="flex justify-between items-center px-8 py-4 w-full bg-surface/50 backdrop-blur-3xl shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
           <Link
             href="/"
             className="text-2xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-orange-600 font-manrope"
@@ -32,7 +32,7 @@ export default function AuthLayout({
           <div className="hidden md:flex gap-8 items-center font-manrope tracking-tight font-semibold">
             <Link
               href="/"
-              className="text-gray-400 hover:text-orange-300 transition-colors duration-300 text-sm"
+              className="text-on-surface-variant hover:text-orange-300 transition-colors duration-300 text-sm"
             >
               Главная
             </Link>
@@ -41,7 +41,7 @@ export default function AuthLayout({
               className={
                 isSignUp
                   ? "text-orange-400 border-orange-500 border-b-2 pb-1 text-sm"
-                  : "text-gray-400 hover:text-orange-300 transition-colors duration-300 text-sm"
+                  : "text-on-surface-variant hover:text-orange-300 transition-colors duration-300 text-sm"
               }
             >
               Регистрация
@@ -51,15 +51,15 @@ export default function AuthLayout({
               className={
                 isSignIn
                   ? "text-orange-400 border-orange-500 border-b-2 pb-1 text-sm"
-                  : "text-gray-400 hover:text-orange-300 transition-colors duration-300 text-sm"
+                  : "text-on-surface-variant hover:text-orange-300 transition-colors duration-300 text-sm"
               }
             >
               Вход
             </Link>
           </div>
           <div className="flex items-center gap-4">
-            <Bell className="text-gray-400 cursor-pointer hover:text-orange-300 transition-colors" size={20} />
-            <Settings className="text-gray-400 cursor-pointer hover:text-orange-300 transition-colors" size={20} />
+            <Bell className="text-on-surface-variant cursor-pointer hover:text-orange-300 transition-colors" size={20} />
+            <Settings className="text-on-surface-variant cursor-pointer hover:text-orange-300 transition-colors" size={20} />
             <button className="md:hidden text-orange-500">
               <Menu size={24} />
             </button>
@@ -80,29 +80,29 @@ export default function AuthLayout({
       </main>
 
       {/* Footer Component */}
-      <footer className="w-full py-12 mt-auto bg-[#131313]">
+      <footer className="w-full py-12 mt-auto bg-surface">
         <div className="flex flex-col items-center gap-4 w-full border-t border-orange-900/10 pt-8 max-w-7xl mx-auto px-6">
           <div className="text-orange-500 font-medium font-manrope text-xs uppercase tracking-widest">
             НГ Молитва
           </div>
-          <div className="text-gray-600 font-manrope text-xs uppercase tracking-widest text-center">
+          <div className="text-on-surface-variant/40 font-manrope text-xs uppercase tracking-widest text-center">
             &copy; 2025 НГ Молитва. Все права защищены.
           </div>
           <div className="flex gap-8">
             <a
-              className="text-gray-600 hover:text-orange-400 transition-colors font-manrope text-xs uppercase tracking-widest opacity-80 hover:opacity-100"
+              className="text-on-surface-variant/40 hover:text-orange-400 transition-colors font-manrope text-xs uppercase tracking-widest opacity-80 hover:opacity-100"
               href="#"
             >
               Политика конфиденциальности
             </a>
             <a
-              className="text-gray-600 hover:text-orange-400 transition-colors font-manrope text-xs uppercase tracking-widest opacity-80 hover:opacity-100"
+              className="text-on-surface-variant/40 hover:text-orange-400 transition-colors font-manrope text-xs uppercase tracking-widest opacity-80 hover:opacity-100"
               href="#"
             >
               Условия использования
             </a>
             <a
-              className="text-gray-600 hover:text-orange-400 transition-colors font-manrope text-xs uppercase tracking-widest opacity-80 hover:opacity-100"
+              className="text-on-surface-variant/40 hover:text-orange-400 transition-colors font-manrope text-xs uppercase tracking-widest opacity-80 hover:opacity-100"
               href="#"
             >
               Поддержка

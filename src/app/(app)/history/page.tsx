@@ -11,7 +11,7 @@ export default function HistoryPage() {
         <h2 className="font-headline text-3xl md:text-5xl font-extrabold text-on-surface tracking-tight mb-2 md:mb-3">
           История сессий
         </h2>
-        <p className="font-body text-gray-400 text-sm md:text-lg">
+        <p className="font-body text-on-surface-variant text-sm md:text-lg">
           Ваш путь духовного сосредоточения в деталях.
         </p>
       </header>
@@ -29,24 +29,24 @@ export default function HistoryPage() {
         <div className="text-orange-500 font-medium font-manrope text-sm tracking-tight">
           НГ Молитва
         </div>
-        <div className="font-manrope text-[10px] uppercase tracking-[0.2em] text-gray-600 opacity-80">
+        <div className="font-manrope text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/40 opacity-80">
           © 2025 НГ Молитва. Все права защищены.
         </div>
         <div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-2">
           <a
-            className="text-gray-600 hover:text-orange-400 transition-colors font-manrope text-[10px] uppercase tracking-widest"
+            className="text-on-surface-variant/40 hover:text-orange-400 transition-colors font-manrope text-[10px] uppercase tracking-widest"
             href="#"
           >
             Политика конфиденциальности
           </a>
           <a
-            className="text-gray-600 hover:text-orange-400 transition-colors font-manrope text-[10px] uppercase tracking-widest"
+            className="text-on-surface-variant/40 hover:text-orange-400 transition-colors font-manrope text-[10px] uppercase tracking-widest"
             href="#"
           >
             Условия использования
           </a>
           <a
-            className="text-gray-600 hover:text-orange-400 transition-colors font-manrope text-[10px] uppercase tracking-widest"
+            className="text-on-surface-variant/40 hover:text-orange-400 transition-colors font-manrope text-[10px] uppercase tracking-widest"
             href="#"
           >
             Поддержка

@@ -68,7 +68,7 @@ export function PrayerTimer({ compact = false }: { compact?: boolean }) {
             onClick={isRunning ? handleStop : handleStart}
             className={`shrink-0 rounded-full font-bold text-[10px] px-5 py-2.5 flex items-center gap-2 active:scale-95 transition-all duration-300 ${
               isRunning
-                ? "bg-white/10 text-red-400 hover:bg-red-500/15"
+                ? "bg-on-surface/10 text-red-400 hover:bg-red-500/15"
                 : "amber-glow text-on-primary shadow-[0_10px_20px_rgba(255,140,0,0.15)] hover:scale-[1.02]"
             }`}
           >

@@ -3,6 +3,7 @@ import { Inter, Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "@/providers/session-provider";
 import { TimerProvider } from "@/providers/timer-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
@@ -33,6 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
+      suppressHydrationWarning
       className={`${inter.variable} ${manrope.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="relative flex min-h-full flex-col overflow-x-hidden">
@@ -42,12 +44,14 @@ export default function RootLayout({
         <div className="orb orb-3" aria-hidden="true" />
         <div className="orb orb-4" aria-hidden="true" />
 
-        <SessionProvider>
-          <TimerProvider>
-            {children}
-            <Toaster position="bottom-center" />
-          </TimerProvider>
-        </SessionProvider>
+        <ThemeProvider>
+          <SessionProvider>
+            <TimerProvider>
+              {children}
+              <Toaster position="bottom-center" />
+            </TimerProvider>
+          </SessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

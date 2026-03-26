@@ -19,6 +19,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
+import { ThemeToggle, ThemeToggleCompact } from "@/components/theme/theme-toggle";
 
 const navItems = [
   { href: "/dashboard", label: "Панель", icon: LayoutDashboard },
@@ -45,7 +46,7 @@ function NavLink({
       className={
         isActive
           ? `flex items-center ${collapsed ? "justify-center" : "gap-4"} bg-gradient-to-r from-orange-500/20 to-transparent text-orange-400 border-l-4 border-orange-500 ${collapsed ? "px-0 py-3 mx-2" : "px-6 py-3 translate-x-1"} duration-300`
-          : `flex items-center ${collapsed ? "justify-center" : "gap-4"} text-gray-500 hover:text-gray-300 hover:bg-[#353534]/30 ${collapsed ? "px-0 py-3 mx-2" : "px-6 py-3"} transition-all duration-300`
+          : `flex items-center ${collapsed ? "justify-center" : "gap-4"} text-on-surface-variant/60 hover:text-on-surface/80 hover:bg-surface-variant/30 ${collapsed ? "px-0 py-3 mx-2" : "px-6 py-3"} transition-all duration-300`
       }
     >
       <Icon className="h-5 w-5 shrink-0" />
@@ -113,7 +114,7 @@ function DesktopSidebar() {
 
   return (
     <aside
-      className={`hidden md:flex h-screen fixed left-0 top-0 z-40 bg-[#0E0E0E]/80 backdrop-blur-2xl flex-col py-6 shadow-[30px_0_60px_rgba(255,140,0,0.04)] transition-all duration-300 ease-in-out ${
+      className={`hidden md:flex h-screen fixed left-0 top-0 z-40 bg-surface-container-lowest/80 backdrop-blur-2xl flex-col py-6 shadow-[30px_0_60px_rgba(255,140,0,0.04)] transition-all duration-300 ease-in-out ${
         collapsed ? "w-16" : "w-64"
       }`}
     >
@@ -124,14 +125,14 @@ function DesktopSidebar() {
             <h1 className="font-manrope text-xl font-bold text-orange-500 uppercase tracking-wider">
               НГ Молитва
             </h1>
-            <p className="text-[10px] text-gray-500 font-label mt-1 uppercase tracking-widest">
+            <p className="text-[10px] text-on-surface-variant/60 font-label mt-1 uppercase tracking-widest">
               Духовная точность
             </p>
           </div>
         )}
         <button
           onClick={toggle}
-          className={`flex items-center justify-center h-8 w-8 rounded-lg text-gray-500 hover:text-gray-300 hover:bg-white/5 transition-all duration-200 ${
+          className={`flex items-center justify-center h-8 w-8 rounded-lg text-on-surface-variant/60 hover:text-on-surface/80 hover:bg-on-surface/5 transition-all duration-200 ${
             collapsed ? "mx-auto" : ""
           }`}
           title={collapsed ? "Развернуть" : "Свернуть"}
@@ -162,20 +163,22 @@ function DesktopSidebar() {
       <div className={`${collapsed ? "px-3" : "px-6"} mt-auto space-y-4`}>
         <StartPrayerButton collapsed={collapsed} />
 
-        <div className="pt-6 border-t border-white/5 space-y-1">
+        <ThemeToggle collapsed={collapsed} />
+
+        <div className="pt-6 border-t border-on-surface/5 space-y-1">
           {collapsed ? (
             <>
               <Link
                 href="#"
                 title="Помощь"
-                className="flex items-center justify-center text-gray-500 hover:text-gray-300 py-2 transition-all"
+                className="flex items-center justify-center text-on-surface-variant/60 hover:text-on-surface/80 py-2 transition-all"
               >
                 <HelpCircle className="h-5 w-5" />
               </Link>
               <button
                 onClick={() => signOut({ callbackUrl: "/sign-in" })}
                 title="Выйти"
-                className="flex items-center justify-center text-gray-500 hover:text-gray-300 py-2 transition-all w-full"
+                className="flex items-center justify-center text-on-surface-variant/60 hover:text-on-surface/80 py-2 transition-all w-full"
               >
                 <LogOut className="h-5 w-5" />
               </button>
@@ -184,14 +187,14 @@ function DesktopSidebar() {
             <>
               <Link
                 href="#"
-                className="flex items-center gap-4 text-gray-500 hover:text-gray-300 px-2 py-2 transition-all"
+                className="flex items-center gap-4 text-on-surface-variant/60 hover:text-on-surface/80 px-2 py-2 transition-all"
               >
                 <HelpCircle className="h-5 w-5" />
                 <span className="font-manrope text-xs">Помощь</span>
               </Link>
               <button
                 onClick={() => signOut({ callbackUrl: "/sign-in" })}
-                className="flex items-center gap-4 text-gray-500 hover:text-gray-300 px-2 py-2 transition-all w-full"
+                className="flex items-center gap-4 text-on-surface-variant/60 hover:text-on-surface/80 px-2 py-2 transition-all w-full"
               >
                 <LogOut className="h-5 w-5" />
                 <span className="font-manrope text-xs">Выйти</span>
@@ -232,14 +235,14 @@ function MobileNav() {
   return (
     <>
       {/* Fixed top bar */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-center h-14 px-4 bg-[#0E0E0E]/90 backdrop-blur-2xl border-b border-white/5">
+      <div className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-center h-14 px-4 bg-surface-container-lowest/90 backdrop-blur-2xl border-b border-on-surface/5">
         <h1 className="font-manrope text-lg font-bold text-orange-500 uppercase tracking-wider">
           НГ Молитва
         </h1>
       </div>
 
       {/* Fixed bottom tab bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0E0E0E]/90 backdrop-blur-2xl border-t border-white/5 pb-6">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-2xl border-t border-on-surface/5 pb-6">
         <nav className="flex items-center justify-around pt-2">
           {tabs.map((tab) => {
             const isActive = pathname === tab.href;
@@ -248,7 +251,7 @@ function MobileNav() {
                 key={tab.href}
                 href={tab.href}
                 className={`flex flex-col items-center gap-1 py-1 px-3 transition-colors duration-200 ${
-                  isActive ? "text-orange-400" : "text-gray-600"
+                  isActive ? "text-orange-400" : "text-on-surface-variant/40"
                 }`}
               >
                 <tab.icon className="h-5 w-5" />
@@ -264,7 +267,7 @@ function MobileNav() {
             <button
               onClick={() => setProfileOpen((v) => !v)}
               className={`flex flex-col items-center gap-1 py-1 px-3 transition-colors duration-200 ${
-                profileOpen ? "text-orange-400" : "text-gray-600"
+                profileOpen ? "text-orange-400" : "text-on-surface-variant/40"
               }`}
             >
               <User className="h-5 w-5" />
@@ -275,11 +278,11 @@ function MobileNav() {
 
             {/* Profile dropdown (opens upward) */}
             {profileOpen && (
-              <div className="absolute bottom-full right-0 mb-3 w-56 rounded-xl bg-[#1A1A1A]/95 backdrop-blur-2xl border border-white/10 shadow-2xl overflow-hidden">
+              <div className="absolute bottom-full right-0 mb-3 w-56 rounded-xl bg-surface-container/95 backdrop-blur-2xl border border-on-surface/10 shadow-2xl overflow-hidden">
                 {/* User email */}
                 {session?.user?.email && (
-                  <div className="px-4 py-3 border-b border-white/5">
-                    <p className="text-[11px] text-gray-400 font-manrope truncate">
+                  <div className="px-4 py-3 border-b border-on-surface/5">
+                    <p className="text-[11px] text-on-surface-variant font-manrope truncate">
                       {session.user.email}
                     </p>
                   </div>
@@ -289,14 +292,15 @@ function MobileNav() {
                   <Link
                     href="#"
                     onClick={() => setProfileOpen(false)}
-                    className="flex items-center gap-3 px-4 py-2.5 text-gray-400 hover:text-gray-200 hover:bg-white/5 transition-colors"
+                    className="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:text-on-surface/90 hover:bg-on-surface/5 transition-colors"
                   >
                     <HelpCircle className="h-4 w-4" />
                     <span className="font-manrope text-xs">Помощь</span>
                   </Link>
+                  <ThemeToggleCompact />
                   <button
                     onClick={() => signOut({ callbackUrl: "/sign-in" })}
-                    className="flex items-center gap-3 px-4 py-2.5 text-gray-400 hover:text-gray-200 hover:bg-white/5 transition-colors w-full"
+                    className="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:text-on-surface/90 hover:bg-on-surface/5 transition-colors w-full"
                   >
                     <LogOut className="h-4 w-4" />
                     <span className="font-manrope text-xs">Выйти</span>

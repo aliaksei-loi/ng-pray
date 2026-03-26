@@ -26,7 +26,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════
           FIXED TOP NAV (lines 133-152)
           ════════════════════════════════════════ */}
-      <header className="fixed top-0 w-full z-50 bg-[#131313]/50 backdrop-blur-3xl shadow-[0_4px_20px_rgba(0,0,0,0.5)] border-b border-[#353534]/40">
+      <header className="fixed top-0 w-full z-50 bg-surface/50 backdrop-blur-3xl shadow-[0_4px_20px_rgba(0,0,0,0.5)] border-b border-surface-variant/40">
         <nav className="flex justify-between items-center px-8 py-4 w-full max-w-7xl mx-auto">
           <div className="flex items-center gap-2">
             <span className="text-2xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-orange-600 font-headline">
@@ -43,19 +43,19 @@ export default async function HomePage() {
             </Link>
             <Link
               href="#"
-              className="text-gray-400 hover:text-orange-300 transition-colors duration-300"
+              className="text-on-surface-variant hover:text-orange-300 transition-colors duration-300"
             >
               Молитвы
             </Link>
             <Link
               href="#"
-              className="text-gray-400 hover:text-orange-300 transition-colors duration-300"
+              className="text-on-surface-variant hover:text-orange-300 transition-colors duration-300"
             >
               Сообщество
             </Link>
           </div>
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-4 text-gray-400">
+            <div className="flex items-center gap-4 text-on-surface-variant">
               <Bell className="w-6 h-6 hover:text-orange-300 cursor-pointer transition-colors" />
               <Settings className="w-6 h-6 hover:text-orange-300 cursor-pointer transition-colors" />
             </div>
@@ -113,7 +113,7 @@ export default async function HomePage() {
             </Link>
             <Link
               href="/sign-in"
-              className="w-full sm:w-auto liquid-glass text-on-surface font-semibold px-12 py-5 rounded-2xl hover:bg-white/5 transition-all active:scale-95 premium-shadow"
+              className="w-full sm:w-auto liquid-glass text-on-surface font-semibold px-12 py-5 rounded-2xl hover:bg-on-surface/5 transition-all active:scale-95 premium-shadow"
             >
               Войти
             </Link>
@@ -237,7 +237,7 @@ export default async function HomePage() {
 
             {/* Gentle Awakener card */}
             <div className="md:col-span-5 liquid-glass rounded-[3rem] p-10 flex flex-col items-start gap-6 premium-shadow gloss-reflection">
-              <div className="w-16 h-16 rounded-2xl bg-white/5 backdrop-blur-md flex items-center justify-center text-primary shadow-inner">
+              <div className="w-16 h-16 rounded-2xl bg-on-surface/5 backdrop-blur-md flex items-center justify-center text-primary shadow-inner">
                 <BellRing className="w-8 h-8" />
               </div>
               <div>
@@ -274,7 +274,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════
           FOOTER (lines 271-292)
           ════════════════════════════════════════ */}
-      <footer className="w-full py-12 mt-auto border-t border-orange-900/10 bg-[#131313]">
+      <footer className="w-full py-12 mt-auto border-t border-orange-900/10 bg-surface">
         <div className="flex flex-col items-center gap-6 w-full max-w-7xl mx-auto px-6">
           <div className="flex flex-col items-center md:items-start w-full md:flex-row md:justify-between">
             <div className="flex flex-col items-center md:items-start mb-8 md:mb-0">
@@ -284,33 +284,33 @@ export default async function HomePage() {
                 </span>
                 <span className="text-orange-500">🙏</span>
               </div>
-              <p className="font-headline text-xs uppercase tracking-widest text-gray-600">
+              <p className="font-headline text-xs uppercase tracking-widest text-on-surface-variant/40">
                 Духовная точность
               </p>
             </div>
             <div className="flex gap-12 mb-8 md:mb-0">
               <a
-                className="font-headline text-xs uppercase tracking-widest text-gray-600 hover:text-orange-400 transition-colors"
+                className="font-headline text-xs uppercase tracking-widest text-on-surface-variant/40 hover:text-orange-400 transition-colors"
                 href="#"
               >
                 Политика конфиденциальности
               </a>
               <a
-                className="font-headline text-xs uppercase tracking-widest text-gray-600 hover:text-orange-400 transition-colors"
+                className="font-headline text-xs uppercase tracking-widest text-on-surface-variant/40 hover:text-orange-400 transition-colors"
                 href="#"
               >
                 Условия использования
               </a>
               <a
-                className="font-headline text-xs uppercase tracking-widest text-gray-600 hover:text-orange-400 transition-colors"
+                className="font-headline text-xs uppercase tracking-widest text-on-surface-variant/40 hover:text-orange-400 transition-colors"
                 href="#"
               >
                 Поддержка
               </a>
             </div>
           </div>
-          <div className="w-full h-px bg-[#1C1B1B]" />
-          <div className="text-gray-600 font-headline text-[10px] uppercase tracking-widest opacity-80 hover:opacity-100 transition-all">
+          <div className="w-full h-px bg-surface-container" />
+          <div className="text-on-surface-variant/40 font-headline text-[10px] uppercase tracking-widest opacity-80 hover:opacity-100 transition-all">
             &copy; 2025 НГ Молитва. Все права защищены.
           </div>
         </div>

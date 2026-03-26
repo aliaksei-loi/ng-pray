@@ -176,7 +176,7 @@ export function SessionsByDate({
       ) : (
         <button
           onClick={loadMore}
-          className="px-6 py-2.5 rounded-full liquid-glass text-xs font-label uppercase tracking-widest text-on-surface-variant/60 hover:text-primary hover:bg-white/5 transition-all"
+          className="px-6 py-2.5 rounded-full liquid-glass text-xs font-label uppercase tracking-widest text-on-surface-variant/60 hover:text-primary hover:bg-on-surface/5 transition-all"
         >
           Загрузить ещё
         </button>
@@ -200,8 +200,8 @@ export function SessionsByDate({
           const titleColor = isToday
             ? "text-orange-400"
             : isYesterday
-              ? "text-gray-400"
-              : "text-gray-500";
+              ? "text-on-surface-variant"
+              : "text-on-surface-variant/60";
 
           return (
             <section key={dateKey}>
@@ -209,8 +209,8 @@ export function SessionsByDate({
                 <h3 className={`font-headline text-lg md:text-2xl font-bold ${titleColor}`}>
                   {getRelativeDateFull(new Date(dateKey + "T12:00:00"))}
                 </h3>
-                <div className="bg-white/5 backdrop-blur-3xl ghost-border px-3 md:px-5 py-1.5 md:py-2 rounded-full flex items-center gap-2 md:gap-3">
-                  <span className="text-[9px] md:text-[10px] uppercase font-label tracking-widest text-gray-500">
+                <div className="bg-on-surface/5 backdrop-blur-3xl ghost-border px-3 md:px-5 py-1.5 md:py-2 rounded-full flex items-center gap-2 md:gap-3">
+                  <span className="text-[9px] md:text-[10px] uppercase font-label tracking-widest text-on-surface-variant/60">
                     Итого:
                   </span>
                   <span className="font-label text-xs md:text-sm font-bold text-orange-300">
@@ -270,7 +270,7 @@ export function SessionsByDate({
               </span>
             </div>
             <div
-              className={`liquid-glass rounded-[2rem] overflow-hidden divide-y divide-white/5${
+              className={`liquid-glass rounded-[2rem] overflow-hidden divide-y divide-on-surface/5${
                 !isToday
                   ? " opacity-60 hover:opacity-100 transition-opacity"
                   : ""

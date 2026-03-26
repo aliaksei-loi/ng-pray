@@ -48,13 +48,13 @@ export function SessionCard({
   if (variant === "history") {
     // History variant — exact Stitch history.html lines 166-179, 209-222, 236-249
     return (
-      <div className="liquid-glass sunlight-shadow rounded-2xl p-4 md:p-7 flex items-center justify-between group hover:bg-white/5 transition-all duration-500">
+      <div className="liquid-glass sunlight-shadow rounded-2xl p-4 md:p-7 flex items-center justify-between group hover:bg-on-surface/5 transition-all duration-500">
         <div className="flex items-center gap-4 md:gap-8 min-w-0">
           <div
             className={`w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center border transition-all duration-500 group-hover:scale-110 shrink-0 ${
               isToday
                 ? "bg-orange-500/10 text-orange-400 border-orange-500/20 group-hover:bg-orange-500/20"
-                : "bg-white/5 text-gray-500 border-white/5 group-hover:text-orange-400 group-hover:bg-orange-500/10 group-hover:border-orange-500/20"
+                : "bg-on-surface/5 text-on-surface-variant/60 border-on-surface/5 group-hover:text-orange-400 group-hover:bg-orange-500/10 group-hover:border-orange-500/20"
             }`}
           >
             <HandHeart className="h-5 w-5 md:h-7 md:w-7" />
@@ -63,7 +63,7 @@ export function SessionCard({
             <h4 className="font-body font-bold text-sm md:text-lg text-on-surface group-hover:text-orange-300 transition-colors truncate">
               {session.note || "Молитва"}
             </h4>
-            <p className="font-label text-[10px] md:text-xs text-gray-500 tracking-wide mt-0.5 md:mt-1">
+            <p className="font-label text-[10px] md:text-xs text-on-surface-variant/60 tracking-wide mt-0.5 md:mt-1">
               {formatTime(start)} — {formatTime(end)}
             </p>
           </div>
@@ -79,7 +79,7 @@ export function SessionCard({
             >
               {formatDurationClock(session.duration)}
             </div>
-            <div className="hidden md:block text-[10px] uppercase tracking-[0.1em] text-gray-600 font-bold mt-1">
+            <div className="hidden md:block text-[10px] uppercase tracking-[0.1em] text-on-surface-variant/40 font-bold mt-1">
               Длительность
             </div>
           </div>
@@ -87,7 +87,7 @@ export function SessionCard({
             variant="ghost"
             size="icon"
             onClick={handleDelete}
-            className="h-8 w-8 rounded-xl text-white/20 opacity-0 transition-all hover:bg-red-500/10 hover:text-red-400 group-hover:opacity-100"
+            className="h-8 w-8 rounded-xl text-on-surface/20 opacity-0 transition-all hover:bg-red-500/10 hover:text-red-400 group-hover:opacity-100"
           >
             <Trash2 className="h-4 w-4" />
           </Button>
@@ -98,13 +98,13 @@ export function SessionCard({
 
   // Dashboard variant — exact Stitch dashboard.html lines 201-213
   return (
-    <div className="p-5 flex items-center justify-between hover:bg-white/[0.04] transition-all group cursor-pointer">
+    <div className="p-5 flex items-center justify-between hover:bg-on-surface/[0.04] transition-all group cursor-pointer">
       <div className="flex items-center gap-5">
         <div
           className={`w-12 h-12 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-500 ${
             isToday
               ? "bg-primary/10 text-primary"
-              : "bg-white/5 text-on-surface-variant/60"
+              : "bg-on-surface/5 text-on-surface-variant/60"
           }`}
         >
           <HandHeart className="h-5 w-5" />
@@ -134,7 +134,7 @@ export function SessionCard({
           variant="ghost"
           size="icon"
           onClick={handleDelete}
-          className="h-8 w-8 rounded-xl text-white/20 opacity-0 transition-all hover:bg-red-500/10 hover:text-red-400 group-hover:opacity-100"
+          className="h-8 w-8 rounded-xl text-on-surface/20 opacity-0 transition-all hover:bg-red-500/10 hover:text-red-400 group-hover:opacity-100"
         >
           <Trash2 className="h-4 w-4" />
         </Button>

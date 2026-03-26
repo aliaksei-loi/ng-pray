@@ -23,7 +23,7 @@ export function TimerDisplay({ seconds, isRunning, compact = false }: TimerDispl
 
       <svg className="absolute w-full h-full -rotate-90" viewBox="0 0 208 208">
         <circle
-          className="text-white/[0.03]"
+          className="text-on-surface/[0.03]"
           cx="104"
           cy="104"
           fill="transparent"

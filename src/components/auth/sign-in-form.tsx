@@ -60,14 +60,14 @@ export function SignInForm() {
             Электронная почта
           </label>
           <div className="relative group">
-            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-orange-400 transition-colors" size={18} />
+            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface/20 group-focus-within:text-orange-400 transition-colors" size={18} />
             <input
               id="email"
               name="email"
               type="email"
               placeholder="email@example.com"
               required
-              className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder-white/20 focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/10 transition-all font-body text-sm"
+              className="w-full bg-on-surface/5 border border-on-surface/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder-on-surface/20 focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/10 transition-all font-body text-sm"
             />
           </div>
         </div>
@@ -79,14 +79,14 @@ export function SignInForm() {
             Пароль
           </label>
           <div className="relative group">
-            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-orange-400 transition-colors" size={18} />
+            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface/20 group-focus-within:text-orange-400 transition-colors" size={18} />
             <input
               id="password"
               name="password"
               type="password"
               placeholder="••••••••"
               required
-              className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder-white/20 focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/10 transition-all font-body text-sm"
+              className="w-full bg-on-surface/5 border border-on-surface/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder-on-surface/20 focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/10 transition-all font-body text-sm"
             />
           </div>
         </div>
@@ -100,8 +100,8 @@ export function SignInForm() {
           </button>
         </div>
       </form>
-      <div className="mt-10 pt-8 border-t border-white/5 text-center">
-        <p className="text-white/40 font-body text-xs">
+      <div className="mt-10 pt-8 border-t border-on-surface/5 text-center">
+        <p className="text-on-surface/40 font-body text-xs">
           Нет аккаунта?{" "}
           <Link
             href="/sign-up"
