@@ -4,7 +4,7 @@ export const signUpSchema = z
   .object({
     name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
     email: z.email("Неверный формат электронной почты"),
-    password: z.string().min(6, "Пароль должен содержать минимум 6 символов"),
+    password: z.string().min(8, "Password must be at least 8 characters"),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -21,7 +21,7 @@ export const createPrayerSessionSchema = z.object({
   startTime: z.iso.datetime(),
   endTime: z.iso.datetime(),
   duration: z.number().int().positive(),
-  note: z.string().optional(),
+  note: z.string().max(2000).optional(),
 });
 
 export type SignUpInput = z.infer<typeof signUpSchema>;
